@@ -186,6 +186,13 @@
 		</plugins>
 	</build>
 
+	<distributionManagement>
+		<repository>
+			<id>repository</id>
+			<url>${repository.url}</url>
+		</repository>
+	</distributionManagement>
+
 	<properties>
 		<project.build.sourceEncoding>utf-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>utf-8</project.reporting.outputEncoding>
