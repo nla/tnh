@@ -32,6 +32,10 @@
     <param-name>segments</param-name>
     <param-value></param-value>
   </init-param>
+  <init-param>
+    <param-name>contextSnippetsPerResult</param-name>
+    <param-value>2</param-value>
+  </init-param>
   <load-on-startup>1</load-on-startup>
 </servlet>
 
