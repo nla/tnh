@@ -43,7 +43,8 @@ public class OpenSearchServlet extends HttpServlet
   public int     hitsPerPage;
   public int     hitsPerPageMax;
   public int     positionMax;
-
+  public int     contextSnippetsPerResult;
+ 
   public int     indexDivisor;
   public String  indexPath;
   public String  segmentPath;
@@ -61,7 +62,9 @@ public class OpenSearchServlet extends HttpServlet
     this.hitsPerPage    = ServletHelper.getInitParameter( config, "hitsPerPage",    10, this.hitsPerPageMax );
     this.hitsPerPageMax = ServletHelper.getInitParameter( config, "hitsPerPageMax", Integer.MAX_VALUE, 1 );
     this.positionMax    = ServletHelper.getInitParameter( config, "positionMax",    Integer.MAX_VALUE, 1 );
-
+    this.contextSnippetsPerResult 
+                        = ServletHelper.getInitParameter( config, "contextSnippetsPerResult", 8, 1 );
+    
     this.indexDivisor   = ServletHelper.getInitParameter( config, "indexDivisor",   1, 1 );
     this.indexPath      = ServletHelper.getInitParameter( config, "index",          false );
     this.segmentPath    = ServletHelper.getInitParameter( config, "segments",       true );
@@ -204,7 +207,7 @@ public class OpenSearchServlet extends HttpServlet
             CustomAnalyzer analyzer = new CustomAnalyzer( );
             analyzer.setFoldAccents( this.foldAccents );
 
-            for ( String snippet : highlighter.getBestFragments( analyzer, "content", raw, 8 ) )
+            for ( String snippet : highlighter.getBestFragments( analyzer, "content", raw, this.contextSnippetsPerResult ) )
               {
                 buf.append( snippet );
                 buf.append( "..." );
